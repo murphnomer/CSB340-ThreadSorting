@@ -47,16 +47,24 @@ public class MergeSortTask<T extends Comparable> extends RecursiveAction {
     }
 
     public void merge(int begin, int mid, int end, T[] array) {
-        T leftBuffer;
-        T rightBuffer;
-        int lPtr = begin;
-        int rPtr = mid + 1;
-        int ptr = begin;
-        boolean cmp;
+        T buffer;
+        int ptr = mid + 1;
 
-        while (lPtr < mid && rPtr < end) {
-            cmp = array[lPtr].compareTo(array[rPtr]) <= 0;
-            if (cmp) {
+        while (begin <= mid && ptr <= end) {
+            if (array[begin].compareTo(array[ptr]) <= 0) {
+                begin++;
+            } else {
+                buffer = array[ptr];
+                int idx = ptr;
+
+                while(idx != begin) {
+                    array[idx] = array[idx-- - 1];
+                }
+                array[begin] = buffer;
+
+                begin++;
+                mid++;
+                ptr++;
 
             }
         }
