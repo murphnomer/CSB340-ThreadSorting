@@ -1,4 +1,3 @@
-import com.sun.scenario.effect.Merge;
 
 import java.util.concurrent.*;
 
@@ -13,6 +12,10 @@ public class MergeSortTask<T extends Comparable> extends RecursiveAction {
         this.begin = begin;
         this.end = end;
         this.array = array;
+    }
+
+    public void insertionSort(T[] array) {
+        insertionSort(0, array.length, array);
     }
 
     public void insertionSort(int begin,int end, T[] array) {
@@ -58,7 +61,8 @@ public class MergeSortTask<T extends Comparable> extends RecursiveAction {
                 int idx = ptr;
 
                 while(idx != begin) {
-                    array[idx] = array[idx-- - 1];
+                    array[idx] = array[idx - 1];
+                    idx--;
                 }
                 array[begin] = buffer;
 
